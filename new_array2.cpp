@@ -1,45 +1,61 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 class arrays {
     private:
-        double *x, *y, z[20];
+        double *p1, *p2;
+        double x[10];
         int n;
     public:
-        arrays(double *x1, double *y1, int n1);
+        arrays(double *, double *, int);
         ~arrays();
         void nor();
         void elq();
 };
-arrays::arrays(double *x1, double *y1, int n1){
-    x = x1;
-    y = y1;
+
+arrays::arrays(double *p11, double *p21, int n1) {
+    p1 = p11;
+    p2 = p21;
     n = n1;
 }
-arrays::~arrays(){
-    delete []x;
-    delete []y;
-}
-void arrays::nor(){
-    for (int i = 0; i < n; i++)
-        z[i] = x[i] - y[i];
-}
-void arrays::elq(){
-    for (int i = 0; i < n; i++)
-        cout<<z[i]<<" ";
-}
-int main(){
-    int n, i;
-    do cin>>n; while(n < 1);
-    double *x = new double[n];
-    double *y = new double[n];
-    for (i = 0; i < n; i++)
-        cin>>x[i];
-    for (i = 0; i < n; i++)
-        cin>>y[i];
-    arrays ob(x, y, n);
-    ob.nor();
-    ob.elq();
-    return 0;
+
+arrays::~arrays() {
+    cout<<" ";
 }
 
+void arrays::nor() {
+    for (int i = 0; i < n; i++)
+        x[i] = p1[i] - p2[i];
+}
+
+void arrays::elq() {
+    cout<<"New array: ";
+    for (int i = 0; i < n; i++)
+        cout<<x[i]<<" ";
+}
+
+int main() {
+    int n, i;
+    do {
+        cout<<"n = ";
+        cin>>n;
+    } while (n <= 0);
+    double *p1, *p2;
+    p1 = new double[n];
+    if (p1 == NULL)
+        exit(1);
+    cout<<"First array: ";
+    for (i = 0; i < n; i++)
+        cin>>p1[i];
+    p2 = new double[n];
+    if (p2 == NULL)
+        exit(1);
+    cout<<"Second array: ";
+    for (i = 0; i < n; i++)
+        cin>>p2[i];
+    arrays obj(p1, p2, n);
+    obj.nor();
+    obj.elq();
+    return 0;
+}
